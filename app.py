@@ -1,6 +1,6 @@
 from flask import Flask, request
 import threading
-from services import WhoIsService
+from services import WhoIsInfoService
 
 
 app = Flask(__name__)
@@ -15,23 +15,19 @@ def index():
         }, 400
 
     url = request_data['url']
+    url = url.strip()
 
-    who_is_service = WhoIsService(url)
-
-    results = who_is_service.resolve_all()
-
-    isp = results['isp']
-    org = results['org']
-    asn = results['asn']
+    info_service = WhoIsInfoService(url)
 
     return {
         'info' : {
-            'ip': who_is_service.ip,
-            'isp': isp,
-            'organisation': org,
-            'asn': asn
-        }
-        
+            'asn' : info_service.get_asn(),
+            'isp' : info_service.get_isp(),
+            'org' : info_service.get_org(),
+            'location' : info_service.get_location(),
+        },
+        'subdomains' : info_service.get_subdomain(),
+        'asset_domains' : info_service.get_asset_domains()
     }
 
 if __name__ == '__main__':
