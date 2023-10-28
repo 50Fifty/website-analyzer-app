@@ -62,12 +62,11 @@ class WhoIsInfoService:
 
         for asset_type, tags in asset_types.items():
             for tag in soup.find_all(tags):
-                # Determine the appropriate attribute for the tag
                 if tag.name == 'a':
                     url_attr = 'href'
                 elif tag.name in ['img', 'script', 'iframe']:
                     url_attr = 'src'
-                elif tag.name == 'link' and tag.attrs.get('rel') == ['stylesheet']:  # Ensure it's a CSS stylesheet
+                elif tag.name == 'link' and tag.attrs.get('rel') == ['stylesheet']:
                     url_attr = 'href'
                 else:
                     url_attr = None
