@@ -89,10 +89,11 @@ class WhoIsService:
 
     def get_info(self):
         return {
-            'asn' : self._get_asn(),
-            'isp' : self._get_isp(),
-            'org' : self._get_org(),
-            'location' : self._get_location(),
+            'asn'           : self._get_asn(),
+            "ip"            : self.ip,
+            'isp'           : self._get_isp(),
+            'organisation'  : self._get_org(),
+            'location'      : self._get_location(),
         }
     
     def _get_asn(self):
