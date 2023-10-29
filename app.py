@@ -31,7 +31,7 @@ def analyse_handler():
 
     return {
         'info' : info_service.get_info(),
-        'subdomains' : info_service.get_subdomain(),
+        'subdomains' : info_service.get_subdomains(),
         'asset_domains' : info_service.get_asset_domains()
     }
 
@@ -66,7 +66,7 @@ def analyse_websocke(ws):
                         ws.send(json.dumps({"data": info_services[client_id].get_info()}))
 
                     elif data['operation'] == 'get_subdomains':
-                        ws.send(json.dumps({"data": info_services[client_id].get_subdomain()}))
+                        ws.send(json.dumps({"data": info_services[client_id].get_subdomains()}))
                     
                     elif data['operation'] == 'get_asset_domains':
                         ws.send(json.dumps({"data": info_services[client_id].get_asset_domains()}))

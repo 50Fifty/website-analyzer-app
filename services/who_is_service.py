@@ -107,8 +107,8 @@ class WhoIsService:
     def _get_location(self):
         return self._lookup_data.get("asn_country_code", "Unknown Location")
     
-    def get_subdomain(self):
-        if self._subdomain_data["code"] != 200:
+    def get_subdomains(self):
+        if "code" in self._subdomain_data:
             return self._subdomain_data
         
         records = self._subdomain_data["result"]["records"]

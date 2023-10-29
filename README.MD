@@ -17,11 +17,11 @@ A Flask-based service to retrieve domain-specific information.
 Query domain info via a GET request.
 Interactive WebSocket for domain data.
 Built-in URL validation.
+Multi-threaded for concurrent requests.
 
 ## Dependencies
-Flask
-Flask-sockets
-gevent
+Python 3.11.2
+Refer to requirements.txt for the full list of dependencies.
 
 ## Setup
 1. Ensure Python is installed.
