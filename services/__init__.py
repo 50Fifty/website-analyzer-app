@@ -1,1 +1,1 @@
-from services.who_is_info_service import WhoIsInfoService
+from services.who_is_service import WhoIsService

@@ -8,17 +8,19 @@ import tldextract
 from bs4 import BeautifulSoup
 import threading
 
-class WhoIsInfoService:
+class WhoIsService:
     def __init__(self, url) -> None:
         load_dotenv()
-        if not urlparse(url).scheme:
-            url = "http://" + url
 
         self.url = url
         hostname = urlparse(url).hostname
         self.ip = socket.gethostbyname(hostname)
         extracted = tldextract.extract(url)
         self.domain = f"{extracted.domain}.{extracted.suffix}"
+
+        # self._perform_rdap_lookup()
+        # self._perform_subdomain_lookup()
+        # self._perform_asset_domains_lookup()
 
         # Multi-threading for faster response
         threads = []
@@ -36,6 +38,8 @@ class WhoIsInfoService:
     
     def _perform_subdomain_lookup(self):
         api_key = os.getenv("API_KEY")
+        if not api_key:
+            raise Exception("API_KEY not found in environment variables")
         url = f"https://subdomains.whoisxmlapi.com/api/v1?apiKey={api_key}&domainName={self.domain}"
         response = requests.get(url)
         self._subdomain_data = response.json()
@@ -83,19 +87,30 @@ class WhoIsInfoService:
             "asset_domains": domains_by_type
         }
 
-    def get_asn(self):
+    def get_info(self):
+        return {
+            'asn' : self._get_asn(),
+            'isp' : self._get_isp(),
+            'org' : self._get_org(),
+            'location' : self._get_location(),
+        }
+    
+    def _get_asn(self):
         return self._lookup_data.get("asn", "Unknown ASN")
 
-    def get_isp(self):
+    def _get_isp(self):
         return self._lookup_data.get("asn_description", "Unknown ISP")
     
-    def get_org(self):
+    def _get_org(self):
         return self._lookup_data.get("network", {}).get("name", "Unknown Organisation")
 
-    def get_location(self):
+    def _get_location(self):
         return self._lookup_data.get("asn_country_code", "Unknown Location")
     
     def get_subdomain(self):
+        if self._subdomain_data["code"] != 200:
+            return self._subdomain_data
+        
         records = self._subdomain_data["result"]["records"]
         res = []
         for record in records:
