@@ -25,10 +25,12 @@ A Flask-based service to retrieve domain-specific information.
 
 ## Setup
 1. Ensure Python is installed.
-2. Install necessary packages:
+2. Create a virtual environment:
+`python -m venv venv`
+3. Install necessary packages in the virtual environment:
 `pip install -r requirements.txt`
-3. Get an API key from https://www.whoisxmlapi.com/.
-4. Set the environment variable (or in the .env file) API_KEY to the API key.
+4. Get an API key from https://www.whoisxmlapi.com/.
+5. Set the environment variable (or in the .env file) API_KEY to the API key.
 
 ## Usage
 ### RESTful Endpoint
@@ -38,12 +40,27 @@ Retrieve domain info:
 Replace `<DOMAIN_NAME>` with the target domain.
 
 ### WebSocket Service
-1.Connect to the `/ws` endpoint.
+1. Connect to the `/ws` endpoint.
 2. Initiate a domain session with a JSON containing the `url` key.
-3. Send operations using the `operation` key:
-- get_info for basic details.
-- get_subdomains for subdomains.
-- get_asset_domains for asset domains.
+3. Send operations using the `operation` key in the message:
+    - get_info for basic details.
+        ```
+        {
+            "operation": "get_info"
+        }
+        ```
+    - get_subdomains for subdomains.
+        ```
+        {
+            "operation": "get_subdomains"
+        }
+        ```
+    - get_asset_domains for asset domains.
+        ```
+        {
+            "operation": "get_asset_domains"
+        }
+        ```
 
 ## Running the Server
 Launch the server with:
