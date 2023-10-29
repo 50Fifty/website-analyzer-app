@@ -1,8 +1,8 @@
 import json
 
-def NewInvalidMessageError(string:bool=True):
+def NewMissingURLError(string:bool=True):
     error = {
-        'error': 'invalid message'
+        'error': 'missing url'
     }
 
     if string:

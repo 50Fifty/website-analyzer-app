@@ -1,6 +1,11 @@
 import json
 
-def NewInvalidOperationError():
-    return json.dumps({
+def NewInvalidOperationError(string:bool=True):
+    error = {
         'error': 'invalid operation'
-    })
+    }
+
+    if string:
+        return json.dumps(error)
+
+    return error

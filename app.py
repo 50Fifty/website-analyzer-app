@@ -4,7 +4,7 @@ import json
 from flask_sockets import Sockets
 import uuid
 from validators import validate_url
-from errors import NewInvalidMessageError, NewInvalidURLError, NewInvalidOperationError, NewSessionNotFoundError, NewInvalidJSONError
+from errors import NewInvalidMessageError, NewInvalidURLError, NewInvalidOperationError, NewSessionNotFoundError, NewInvalidJSONError, NewMissingURLError
 
 app = Flask(__name__)
 sockets = Sockets(app)
@@ -16,16 +16,12 @@ def analyse_handler():
     request_data = request.args
     
     if 'url' not in request_data:
-        return {
-            'error': 'url is required'
-        }, 400
+        return NewMissingURLError(string=False), 400
 
     url = request_data['url']
     
     if not validate_url(url):
-        return {
-            'error': 'invalid url'
-        }, 400
+        return NewInvalidURLError(string=False), 400
 
     info_service = WhoIsService(url)
 
