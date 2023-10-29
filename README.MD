@@ -2,26 +2,26 @@
 A Flask-based service to retrieve domain-specific information.
 
 ## Table of Contents
-1. Features
-2. Dependencies
-3. Setup
-4. Usage
-- RESTful Endpoint
-- WebSocket Service
-5. Running the Server
-6. Limitations and Caveats
-7. Contribution
-8. License
+1. [Features](#features)
+2. [Dependencies](#dependencies)
+3. [Setup](#setup)
+4. [Usage](#usage)
+    4.1. [RESTful Endpoint](#restful-endpoint)
+    4.2. [WebSocket Service](#websocket-service)
+5. [Running the Server](#running-the-server)
+6. [Limitations and Caveats](#limitations-and-caveats)
+7. [Testing](#testing)
+8. [License](#license)
 
 ## Features
-Query domain info via a GET request.
-Interactive WebSocket for domain data.
-Built-in URL validation.
-Multi-threaded for concurrent requests.
+1. Query domain info via a GET request.
+2. Interactive WebSocket for domain data.
+3. Built-in URL validation.
+4. Multi-threaded for concurrent requests.
 
 ## Dependencies
-Python 3.11.2
-Refer to requirements.txt for the full list of dependencies.
+1. Python 3.11.2
+2. Refer to requirements.txt for the full list of dependencies.
 
 ## Setup
 1. Ensure Python is installed.
@@ -52,7 +52,6 @@ Launch the server with:
 Access at http://localhost:5000/.
 
 ## Limitations and Caveats
-WhoIsService, validate_url, etc., implementations are not provided here.
 No authentication or rate-limiting; not advisable for production usage.
 Errors are JSON-formatted with the error key.
 
