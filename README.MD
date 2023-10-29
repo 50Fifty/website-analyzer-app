@@ -1,4 +1,4 @@
-# Domain Info Service
+# Website Analyzer Flask App    ![Python 3.11.2](https://img.shields.io/badge/python-3.11.2-blue.svg) ![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Status](https://img.shields.io/badge/status-active-brightgreen.svg)
 A Flask-based service to retrieve domain-specific information.
 
 ## Table of Contents
